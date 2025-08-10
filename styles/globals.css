@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .player-container {
+    @apply flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-b from-background to-muted/20;
+  }
+  
+  .player-card {
+    @apply w-full max-w-sm bg-card border border-border rounded-xl shadow-lg backdrop-blur-sm;
+  }
+  
+  .track-info {
+    @apply text-center p-6 border-b border-border;
+  }
+  
+  .track-title {
+    @apply text-lg font-semibold text-foreground truncate mb-1;
+  }
+  
+  .track-artist {
+    @apply text-sm text-muted-foreground truncate;
+  }
+  
+  .progress-container {
+    @apply px-6 py-4 space-y-2;
+  }
+  
+  .progress-bar {
+    @apply w-full h-2 bg-secondary rounded-full overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-primary transition-all duration-150 ease-out;
+  }
+  
+  .time-display {
+    @apply flex justify-between text-xs text-muted-foreground;
+  }
+  
+  .controls-container {
+    @apply flex items-center justify-center gap-4 p-6;
+  }
+  
+  .control-button {
+    @apply flex items-center justify-center w-12 h-12 rounded-full bg-secondary hover:bg-accent focus:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .play-button {
+    @apply flex items-center justify-center w-16 h-16 rounded-full bg-primary hover:bg-primary/90 focus:bg-primary/90 text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .volume-container {
+    @apply flex items-center gap-2 px-6 py-2;
+  }
+  
+  .volume-slider {
+    @apply flex-1 h-2 bg-secondary rounded-full overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+  
+  .volume-fill {
+    @apply h-full bg-primary transition-all duration-150 ease-out;
+  }
+  
+  .file-input-container {
+    @apply relative overflow-hidden inline-block;
+  }
+  
+  .file-input {
+    @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer;
+  }
+  
+  .file-input-label {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 bg-secondary hover:bg-accent focus:bg-accent text-secondary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors duration-200 cursor-pointer;
+  }
+  
+  .playlist-container {
+    @apply mt-6 w-full max-w-sm;
+  }
+  
+  .playlist-item {
+    @apply flex items-center justify-between p-3 bg-card border border-border rounded-lg hover:bg-accent/50 focus:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors duration-200 cursor-pointer;
+  }
+  
+  .playlist-item.active {
+    @apply bg-primary/10 border-primary/20;
+  }
+  
+  .playlist-item-info {
+    @apply flex-1 min-w-0;
+  }
+  
+  .playlist-item-title {
+    @apply text-sm font-medium text-foreground truncate;
+  }
+  
+  .playlist-item-remove {
+    @apply flex items-center justify-center w-8 h-8 rounded-full hover:bg-destructive/10 focus:bg-destructive/10 text-muted-foreground hover:text-destructive focus:text-destructive focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 transition-colors duration-200;
+  }
+  
+  .loading-spinner {
+    @apply inline-block w-4 h-4 border-2 border-current border-r-transparent rounded-full animate-spin;
+  }
+  
+  .error-state {
+    @apply text-center p-6 text-destructive;
+  }
+  
+  .skeleton {
+    @apply bg-muted animate-pulse rounded;
+  }
+  
+  .skeleton-text {
+    @apply h-4 bg-muted animate-pulse rounded;
+  }
+  
+  .skeleton-title {
+    @apply h-6 bg-muted animate-pulse rounded;
+  }
+}
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  .safe-area-inset {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .player-container {
+    @apply px-6 py-8;
+  }
+  
+  .player-card {
+    @apply max-w-md;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  .player-container {
+    @apply px-2 py-4 safe-area-inset;
+  }
+  
+  .player-card {
+    @apply max-w-full mx-2;
+  }
+  
+  .controls-container {
+    @apply gap-6 p-8;
+  }
+  
+  .control-button {
+    @apply w-14 h-14 no-tap-highlight;
+  }
+  
+  .play-button {
+    @apply w-20 h-20 no-tap-highlight;
+  }
+  
+  .progress-bar,
+  .volume-slider {
+    @apply h-3;
+  }
+  
+  .playlist-item {
+    @apply p-4;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill,
+  .volume-fill,
+  .control-button,
+  .play-button,
+  .playlist-item {
+    @apply transition-none;
+  }
+  
+  .animate-spin-slow,
+  .animate-pulse-subtle,
+  .loading-spinner {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .player-card {
+    @apply border-2;
+  }
+  
+  .control-button,
+  .play-button {
+    @apply border border-foreground;
+  }
+}
+
+/* Audio element styling */
+audio {
+  @apply hidden;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) hsl(var(--secondary));
+}
